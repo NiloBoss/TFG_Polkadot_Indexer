@@ -1,0 +1,31 @@
+
+type Transfer @entity {
+  id: ID! # Id field is always required 
+  amount: BigInt # Amount that is transferred
+  blockNumber: BigInt # The block height of the transfer
+  from: Account! # The account that transfers are made from
+  to: Account! # The account that transfers are made to
+}
+
+type Block @entity {
+  id: ID!
+  blockNumber: BigInt
+  timeStamp: Date # Block creation date
+}
+
+type Extrinsics @entity {
+  id: ID!
+  blockNumber: BigInt
+  index: BigInt # Index in which the extrinsic is evaluated from
+  success: Boolean # Determines wheter the extraction was succesfull or not
+}
+
+type Account @entity {
+  id: ID! # Key
+  publicKey: String! # Public key from the user
+  firstTransferBlock: BigInt 
+  lastTransferBlock: BigInt
+  sentTransactions: [Transfer] @derivedFrom(field: "from")
+  receivedTransactions: [Transfer] @derivedFrom(field: "to")
+}
+

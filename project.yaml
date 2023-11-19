@@ -1,0 +1,41 @@
+# // DO NOT EDIT
+specVersion: 1.0.0
+version: 0.0.1
+name: polkadot-starter
+description: >-
+  This project can be used as a starting point for quering data from Polkadot blockchain
+runner:
+  node:
+    name: '@subql/node'
+    version: '>=3.0.1'
+  query:
+    name: '@subql/query'
+    version: '*'
+schema:
+  file: ./schema.graphql
+network:
+  chainId: '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3'
+  endpoint:
+    - wss://polkadot.api.onfinality.io/public-ws
+    - wss://rpc.polkadot.io
+    - >-
+      wss://polkadot.api.onfinality.io/ws?apikey=d21b5042-1295-4149-983d-0178e7d2e62a
+dataSources:
+  - kind: substrate/Runtime
+    startBlock: 18037200
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - kind: substrate/BlockHandler
+          handler: handleBlock
+          filter:
+            modulo: 100
+        - kind: substrate/CallHandler
+          handler: handleCall
+        - kind: substrate/EventHandler
+          handler: handleEvent
+          filter:
+            module: balances
+            method: Transfer
+
+            

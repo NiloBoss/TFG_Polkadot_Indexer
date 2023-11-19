@@ -1,0 +1,40 @@
+{
+  "name": "Polkadot_pochete",
+  "version": "1.0.0",
+  "description": "This project can be used as a starting point for developing your SubQuery project",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "subql build",
+    "codegen": "subql codegen",
+    "start:docker": "docker-compose pull && docker-compose up --remove-orphans",
+    "dev": "subql codegen && subql build && docker-compose pull && docker-compose up --remove-orphans",
+    "prepack": "rm -rf dist && npm run build",
+    "test": "subql build && subql-node test"
+  },
+  "homepage": "https://github.com/subquery/subql-starter",
+  "repository": "github:subquery/subql-starter",
+  "files": [
+    "dist",
+    "schema.graphql",
+    "project.yaml"
+  ],
+  "author": "Daniel Sanchez Gomez",
+  "license": "MIT",
+  "devDependencies": {
+    "@polkadot/api": "^10.10.1",
+    "@subql/cli": "latest",
+    "@subql/common": "^3.2.0",
+    "@subql/testing": "latest",
+    "@subql/types": "latest",
+    "@types/jquery": "^3.5.25",
+    "@types/node": "^20.8.9",
+    "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "ipfs-unixfs": "6.0.6"
+  },
+  "dependencies": {
+    "@polkadot/types": "^10.10.1",
+    "@subql/frontier-evm-processor": "^1.0.0"
+  }
+}
